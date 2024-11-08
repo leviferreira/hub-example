@@ -1,9 +1,9 @@
 app:
-  title: Scaffolded Backstage App
+  title: Wikimedia Hub
   baseUrl: http://localhost:3000
 
 organization:
-  name: My Company
+  name: Wikimedia Hub
 
 backend:
   # Used for enabling authentication, secret is shared by all backend plugins
@@ -44,6 +44,12 @@ integrations:
     #   token: ${GHE_TOKEN}
 
 proxy:
+  endpoints:
+    '/latest-backports':
+      target: 'https://train-stats.toolforge.org/backports?start_date=2024-11-01&end_date=2024-11-10'
+    '/backports-graph':
+      target: "https://data.releng.team/deploys.json?sql=select+type%2C+strftime%28%27%25Y%27%2C+datetime%28timestamp%29%29+as+year%2C+count%28*%29+from+deploys+group+by+type%2C+year%3B"
+
   ### Example for how to add a proxy endpoint for the frontend.
   ### A typical reason to do this is to handle HTTPS and CORS for internal services.
   # endpoints:
